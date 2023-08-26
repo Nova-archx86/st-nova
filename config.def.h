@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Mononoki Nerd Font:pixelsize=20:antialias=true:autohint=true";
+static char *font = "Mononoki Nerd Font:pixelsize=25:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -167,7 +167,7 @@ static const ColorScheme schemes[] = {
 };
 
 static const char * const * colorname;
-int colorscheme = 0;
+int colorscheme = 1;
 
 /*
  * Default colors (colorname index)
