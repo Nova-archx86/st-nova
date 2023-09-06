@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Mononoki Nerd Font:pixelsize=25:antialias=true:autohint=true";
-static int borderpx = 2;
+static char *font = "Mononoki Nerd Font:pixelsize=22:antialias=true:autohint=true";
+static int borderpx = 1;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -94,7 +94,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.8;
+float alpha = 1.0;
 
 typedef struct {
 	const char* const colors[258]; /* terminal colors */
@@ -114,7 +114,7 @@ static const ColorScheme schemes[] = {
 	  "blue2", "magenta3", "cyan3", "gray90",
 	  "gray50", "red", "green", "yellow",
 	  "#5c5cff", "magenta", "cyan", "white",
-	  [256]="#cccccc", "#555555"}, 7, 0, 256, 257},
+	  [256]="#cccccc", "#555555"}, 7, 0, 10, 257},
 
 	// Alacritty (dark)
 	{{"#1d1f21", "#cc6666", "#b5bd68", "#f0c674",
@@ -167,7 +167,7 @@ static const ColorScheme schemes[] = {
 };
 
 static const char * const * colorname;
-int colorscheme = 1;
+int colorscheme = 0;
 
 /*
  * Default colors (colorname index)
@@ -185,7 +185,7 @@ static unsigned int defaultrcs;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 2;
+static unsigned int cursorshape = 1;
 
 /*
  * Default columns and rows numbers
@@ -199,7 +199,7 @@ static unsigned int rows = 24;
  */
 static unsigned int mouseshape = XC_xterm;
 static unsigned int mousefg = 7;
-static unsigned int mousebg = 0;
+static unsigned int mousebg = 1;
 
 /*
  * Color used to display font attributes when fontconfig selected a font which
@@ -222,6 +222,8 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
+	{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
+	{ ShiftMask,            Button5, kscrolldown,    {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -248,6 +250,8 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
+	{ ShiftMask,        XK_Page_Up,     kscrollup,      {.i = -1} },
+	{ ShiftMask,        XK_Page_Down,   kscrolldown,    {.i = -1} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ ACMPL_MOD,            XK_slash,       autocomplete,   { .i = ACMPL_WORD        } },
 	{ ACMPL_MOD,            XK_period,      autocomplete,   { .i = ACMPL_FUZZY_WORD  } },
